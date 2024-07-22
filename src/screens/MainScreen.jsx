@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Button from '../components/Button';
 import { Colors } from '../data/colors';
+import DiceImage from '../components/DiceImage';
 
 const MainScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.header}>Super Dice Game</Text>
-      <View style={styles.imageContainer}></View>
+      <View style={styles.imageContainer}>
+        <DiceImage imageNumber={0} />
+      </View>
       <Button title='Roll' isPrimary />
       <View
         style={{
@@ -38,6 +41,8 @@ const styles = StyleSheet.create({
     width: 200,
     borderRadius: 16,
     backgroundColor: Colors.primary,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
