@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Button from '../components/Button';
+import { Colors } from '../data/colors';
 
 const MainScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.header}>Super Dice Game</Text>
       <View style={styles.imageContainer}></View>
-      <Button title='Roll' />
+      <Button title='Roll' isPrimary />
       <View
         style={{
           height: 300,
@@ -16,7 +17,7 @@ const MainScreen = () => {
           borderRadius: 16,
         }}
       ></View>
-      <Button title='Reset' />
+      <Button title='Reset' isWarning />
     </View>
   );
 };
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
     borderRadius: 16,
-    backgroundColor: '#98D4BB',
+    backgroundColor: Colors.primary,
   },
 });
 
