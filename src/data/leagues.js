@@ -108,6 +108,7 @@ export const Player = {
   score: 0,
   nameStyle: {
     fontSize: 32,
+    fontStyle: 'italic',
   },
   scoreStyle: {
     fontSize: 30,

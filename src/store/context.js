@@ -98,6 +98,20 @@ export const GameContextProvider = ({ children }) => {
     } else {
       leaguesSlice = newLeagues.slice(playerIndex - 2, playerIndex + 3);
     }
+    const finalPlayerIndex = leaguesSlice.findIndex(
+      item => item.name === 'You'
+    );
+    leaguesSlice[finalPlayerIndex] = {
+      ...leaguesSlice[finalPlayerIndex],
+      nameStyle: {
+        ...leaguesSlice[finalPlayerIndex].nameStyle,
+        ...leaguesSlice[finalPlayerIndex + 1].nameStyle,
+      },
+      scoreStyle: {
+        ...leaguesSlice[finalPlayerIndex].scoreStyle,
+        ...leaguesSlice[finalPlayerIndex + 1].scoreStyle,
+      },
+    };
     return leaguesSlice;
   }, [playerScore]);
 
