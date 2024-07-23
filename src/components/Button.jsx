@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { Colors } from '../data/colors';
+import { MainColors } from '../data/colors';
 
 const Button = ({ onPressHandler, title, isPrimary, isWarning }) => {
   return (
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   primaryContainer: {
-    backgroundColor: Colors.primary,
+    backgroundColor: MainColors.primary,
   },
   primaryText: {
     fontSize: 20,
@@ -41,11 +41,11 @@ const styles = StyleSheet.create({
   },
   warningContainer: {
     borderWidth: 1,
-    borderColor: Colors.warningBorder,
+    borderColor: MainColors.warningBorder,
   },
   warningText: {
     fontSize: 18,
-    color: Colors.warningText,
+    color: MainColors.warningText,
   },
 });
 

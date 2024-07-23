@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Button from '../components/Button';
-import { Colors } from '../data/colors';
+import { MainColors } from '../data/colors';
 import DiceImage from '../components/DiceImage';
+import LeaguesView from '../components/LeaguesView';
 
 const MainScreen = () => {
   const [diceNumber, setDiceNumber] = useState(0);
@@ -24,15 +25,7 @@ const MainScreen = () => {
           setDiceNumber(rollTheDice());
         }}
       />
-      <View
-        style={{
-          height: 300,
-          width: 340,
-          borderWidth: 1,
-          borderColor: '#98D4BB',
-          borderRadius: 16,
-        }}
-      ></View>
+      <LeaguesView />
       <Button title='Reset' isWarning />
     </View>
   );
@@ -53,7 +46,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: 200,
     borderRadius: 16,
-    backgroundColor: Colors.primary,
+    backgroundColor: MainColors.primary,
     justifyContent: 'center',
     alignItems: 'center',
   },
