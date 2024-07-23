@@ -1,15 +1,45 @@
-import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { useCallback, useState } from 'react';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import Button from '../components/Button';
 import { MainColors } from '../data/colors';
 import DiceImage from '../components/DiceImage';
 import LeaguesView from '../components/LeaguesView';
+import { useGameContext } from '../store/context';
 
 const MainScreen = () => {
   const [diceNumber, setDiceNumber] = useState(0);
+  const { dispatch } = useGameContext();
 
-  const rollTheDice = () => {
+  const rollTheDice = useCallback(() => {
     return Math.floor(Math.random() * 6) + 1;
+  }, []);
+
+  const pressRollButton = () => {
+    const newDiceNumber = rollTheDice();
+    dispatch({
+      type: 'changePlayerScore',
+      previousDiceNumber: diceNumber,
+      currentDiceNumber: newDiceNumber,
+    });
+    setDiceNumber(newDiceNumber);
+  };
+
+  const pressResetButton = () => {
+    Alert.alert('Warning', 'Do you really want to reset your score?', [
+      {
+        text: 'No',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: () => {
+          setDiceNumber(0);
+          dispatch({
+            type: 'resetPlayerScore',
+          });
+        },
+      },
+    ]);
   };
 
   return (
@@ -22,11 +52,17 @@ const MainScreen = () => {
         title='Roll'
         isPrimary
         onPressHandler={() => {
-          setDiceNumber(rollTheDice());
+          pressRollButton();
         }}
       />
       <LeaguesView />
-      <Button title='Reset' isWarning />
+      <Button
+        title='Reset'
+        isWarning
+        onPressHandler={() => {
+          pressResetButton();
+        }}
+      />
     </View>
   );
 };

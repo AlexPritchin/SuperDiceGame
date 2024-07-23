@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { MainColors } from '../data/colors';
-import { Leagues } from '../data/leagues';
+import { useGameContext } from '../store/context';
 
 const LeaguesView = () => {
-  const leaguesToDisplay = Leagues.slice(0, 5);
-  leaguesToDisplay.reverse();
+  const { leaguesToDisplay } = useGameContext();
 
   return (
     <View style={styles.mainContainer}>
