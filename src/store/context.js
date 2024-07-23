@@ -1,5 +1,12 @@
-import { createContext, useContext, useMemo, useReducer } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+} from 'react';
 import { Leagues, Player } from '../data/leagues';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GameContext = createContext(undefined);
 
@@ -7,8 +14,19 @@ const initialPlayerScore = 0;
 
 const scoresForDiceNumbers = [-20, -10, -5, 10, 30, 50];
 
+const saveState = async playerScore => {
+  try {
+    await AsyncStorage.setItem('player-score', playerScore.toString());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const playerScoreReducer = (playerScore, action) => {
   switch (action.type) {
+    case 'setPlayerScore': {
+      return action.newPlayerScore;
+    }
     case 'changePlayerScore': {
       const bonusModifier =
         action.currentDiceNumber > 3 &&
@@ -21,9 +39,11 @@ const playerScoreReducer = (playerScore, action) => {
       if (newPlayerScore < 0) {
         newPlayerScore = 0;
       }
+      saveState(newPlayerScore);
       return newPlayerScore;
     }
     case 'resetPlayerScore': {
+      saveState(0);
       return 0;
     }
     default:
@@ -36,6 +56,24 @@ export const GameContextProvider = ({ children }) => {
     playerScoreReducer,
     initialPlayerScore
   );
+
+  useEffect(() => {
+    const getState = async () => {
+      try {
+        const savedPlayerScore = await AsyncStorage.getItem('player-score');
+        if (savedPlayerScore !== null) {
+          dispatch({
+            type: 'setPlayerScore',
+            newPlayerScore: Number(savedPlayerScore),
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getState();
+  }, []);
 
   const leaguesSliceToDisplay = useMemo(() => {
     const newLeagues = [
