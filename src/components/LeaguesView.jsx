@@ -2,11 +2,16 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MainColors } from '../data/colors';
 import { useGameContext } from '../store/context';
 
-const LeaguesView = () => {
+const LeaguesView = ({ isPortraitOrientation }) => {
   const { leaguesToDisplay } = useGameContext();
 
   return (
-    <View style={styles.mainContainer}>
+    <View
+      style={[
+        styles.mainContainer,
+        { height: isPortraitOrientation ? 300 : 240 },
+      ]}
+    >
       {leaguesToDisplay.map((league, index) => (
         <View key={index} style={styles.leagueContainer}>
           <Text style={[styles.text, league.nameStyle]}>{league.name}</Text>
@@ -19,7 +24,6 @@ const LeaguesView = () => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    height: 300,
     width: 340,
     borderWidth: 1,
     borderColor: MainColors.primary,
