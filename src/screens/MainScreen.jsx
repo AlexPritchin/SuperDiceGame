@@ -45,6 +45,14 @@ const MainScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <Text style={styles.header}>Super Dice Game</Text>
+      <LeaguesView />
+      <Button
+        title='Reset'
+        isWarning
+        onPressHandler={() => {
+          pressResetButton();
+        }}
+      />
       <View style={styles.imageContainer}>
         <DiceImage imageNumber={diceNumber} />
       </View>
@@ -53,14 +61,6 @@ const MainScreen = () => {
         isPrimary
         onPressHandler={() => {
           pressRollButton();
-        }}
-      />
-      <LeaguesView />
-      <Button
-        title='Reset'
-        isWarning
-        onPressHandler={() => {
-          pressResetButton();
         }}
       />
     </View>
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 60,
+    marginBottom: -10,
   },
   imageContainer: {
     height: 200,
