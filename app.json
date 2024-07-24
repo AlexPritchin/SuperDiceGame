@@ -2,7 +2,7 @@
   "expo": {
     "name": "Super Dice",
     "slug": "SuperDiceGame",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "default",
     "icon": "./assets/diceIcon.png",
     "userInterfaceStyle": "light",
@@ -16,12 +16,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/diceIconLarge.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.oleksiiprytchyn.SuperDiceGame"
     },
     "web": {
       "favicon": "./assets/diceFavicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "273eece3-e353-4659-8d14-ea29413276d2"
+      }
     }
   }
 }

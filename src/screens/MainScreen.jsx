@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, StatusBar, StyleSheet, Text, View } from 'react-native';
 import Button from '../components/Button';
 import { MainColors } from '../data/colors';
 import DiceImage from '../components/DiceImage';
@@ -7,7 +7,7 @@ import LeaguesView from '../components/LeaguesView';
 import { useGameContext } from '../store/context';
 import * as ScreenOrientation from 'expo-screen-orientation';
 
-const MainScreen = () => {
+const MainScreen = ({ onLayoutHandler }) => {
   const [isPortraitMode, setIsPortraitMode] = useState(true);
   const [diceNumber, setDiceNumber] = useState(0);
   const { dispatch } = useGameContext();
@@ -58,7 +58,11 @@ const MainScreen = () => {
   };
 
   return (
-    <View style={[styles.mainContainer, !isPortraitMode && { gap: 20 }]}>
+    <View
+      style={[styles.mainContainer, !isPortraitMode && { gap: 20 }]}
+      onLayout={onLayoutHandler}
+    >
+      <StatusBar backgroundColor={'transparent'} translucent />
       <Text style={[styles.header, !isPortraitMode && { marginTop: 10 }]}>
         Super Dice Game
       </Text>
